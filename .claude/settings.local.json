@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(Get-ChildItem -Recurse \"C:\\\\Users\\\\nolan\\\\Desktop\\\\RandomProjects\\\\NetlifyTest\" | Where-Object { -not $_.PSIsContainer } | ForEach-Object { $_.FullName.Replace\\(\"C:\\\\Users\\\\nolan\\\\Desktop\\\\RandomProjects\\\\NetlifyTest\\\\\", \"\"\\) } | Sort-Object)"
+    ]
+  }
+}

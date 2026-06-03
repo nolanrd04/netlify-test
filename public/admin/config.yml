@@ -1,0 +1,59 @@
+backend:
+  name: git-gateway
+  branch: main
+
+# Where uploaded media is stored in the repo and served from
+media_folder: "public/images/uploads"
+public_folder: "/images/uploads"
+
+# Show the editorial workflow (draft → review → ready)
+publish_mode: editorial_workflow
+
+collections:
+  # ── Pages ──────────────────────────────────────────────────────────────────
+  - name: "pages"
+    label: "Pages"
+    files:
+      - label: "Home"
+        name: "home"
+        file: "public/content/pages/home.json"
+        format: json
+        fields:
+          - { label: "Page Title",    name: title,       widget: string }
+          - { label: "Tagline",       name: tagline,     widget: string }
+          - { label: "Description",   name: description, widget: textarea }
+          - { label: "Hero Button",   name: heroButton,  widget: string,   default: "Learn More" }
+
+      - label: "About"
+        name: "about"
+        file: "public/content/pages/about.json"
+        format: json
+        fields:
+          - { label: "Page Title",       name: title,       widget: string }
+          - { label: "Description",      name: description, widget: textarea }
+          - { label: "Mission Statement",name: mission,     widget: textarea }
+          - { label: "Body Content",     name: body,        widget: markdown }
+
+      - label: "Contact"
+        name: "contact"
+        file: "public/content/pages/contact.json"
+        format: json
+        fields:
+          - { label: "Page Title",   name: title,       widget: string }
+          - { label: "Description",  name: description, widget: textarea }
+          - { label: "Email",        name: email,       widget: string }
+          - { label: "Phone",        name: phone,       widget: string }
+          - { label: "Address",      name: address,     widget: text }
+
+  # ── Settings ───────────────────────────────────────────────────────────────
+  - name: "settings"
+    label: "Settings"
+    files:
+      - label: "General"
+        name: "general"
+        file: "public/content/settings/general.json"
+        format: json
+        fields:
+          - { label: "Site Title",  name: siteTitle,   widget: string }
+          - { label: "Tagline",     name: tagline,     widget: string }
+          - { label: "Footer Text", name: footerText,  widget: string }

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Acme Digital — Home</title>
+  <meta name="description" content="We build things people love to use." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/styles.css" />
+  <!-- Netlify Identity — redirect after login -->
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container">
+      <a href="/" class="logo">Acme Digital</a>
+      <nav class="site-nav" aria-label="Main navigation">
+        <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="/about.html">About</a></li>
+          <li><a href="/contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container">
+        <h1 id="page-title">Welcome to Acme Digital</h1>
+        <p class="hero-tagline" id="page-tagline">We build things people love to use</p>
+        <p class="hero-description" id="page-description">
+          From idea to launch, we partner with businesses of all sizes to design,
+          build, and grow their digital presence.
+        </p>
+        <div class="hero-actions">
+          <a href="/about.html" class="btn btn-primary" id="hero-btn">Learn More</a>
+          <a href="/contact.html" class="btn btn-secondary">Get in Touch</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features">
+      <div class="container">
+        <h2>What We Do</h2>
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">✦</div>
+            <h3>Design</h3>
+            <p>Beautiful, intuitive interfaces that users love and remember.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">⚡</div>
+            <h3>Development</h3>
+            <p>Fast, reliable solutions built with modern technology and best practices.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">★</div>
+            <h3>Strategy</h3>
+            <p>Data-driven insights and clear roadmaps to guide your digital growth.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+      <div class="container">
+        <h2>Ready to get started?</h2>
+        <p>Join hundreds of businesses who trust us with their digital presence.</p>
+        <a href="/contact.html" class="btn btn-primary">Contact Us Today</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p id="footer-text">© 2025 Acme Digital. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="/js/main.js"></script>
+  <script>
+    // Pull CMS-managed content into the page
+    loadContent('/content/pages/home.json', {
+      '#page-title':       'title',
+      '#page-tagline':     'tagline',
+      '#page-description': 'description',
+      '#hero-btn':         'heroButton',
+    });
+    loadSettings();
+
+    // Redirect logged-in Netlify Identity users to /admin
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on('init', user => {
+        if (!user) {
+          window.netlifyIdentity.on('login', () => {
+            document.location.href = '/admin/';
+          });
+        }
+      });
+    }
+  </script>
+
+</body>
+</html>

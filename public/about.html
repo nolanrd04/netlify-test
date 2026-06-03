@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Acme Digital — About</title>
+  <meta name="description" content="Learn who we are and why we do what we do." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container">
+      <a href="/" class="logo">Acme Digital</a>
+      <nav class="site-nav" aria-label="Main navigation">
+        <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="/about.html">About</a></li>
+          <li><a href="/contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- Page hero -->
+    <section class="page-hero">
+      <div class="container">
+        <h1 id="page-title">About Us</h1>
+        <p id="page-description">
+          We're a small team of designers, developers, and strategists who believe
+          great software should be simple, fast, and built to last.
+        </p>
+      </div>
+    </section>
+
+    <!-- Mission -->
+    <section class="page-section">
+      <div class="container">
+        <h2 class="section-title">Our Mission</h2>
+        <blockquote class="mission-block" id="page-mission">
+          Our mission is to make digital experiences more human — removing friction,
+          adding clarity, and putting real people at the center of every decision we make.
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- Story / Body (CMS markdown rendered here) -->
+    <section class="page-section bg-alt">
+      <div class="container">
+        <div class="prose" id="page-body">
+          <h2>Our Story</h2>
+          <p>
+            Acme Digital started in 2018 with a simple idea: that small businesses deserve
+            the same quality of software as the big ones. Since then we've helped over 200
+            clients across 12 industries launch products they're genuinely proud of.
+          </p>
+          <h2>Our Values</h2>
+          <p><strong>Simplicity</strong> — We cut scope before we cut corners.</p>
+          <p><strong>Transparency</strong> — You always know where your project stands.</p>
+          <p><strong>Craftsmanship</strong> — We sweat the details so your users don't have to.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+      <div class="container">
+        <h2>Want to work together?</h2>
+        <p>We'd love to hear about your project.</p>
+        <a href="/contact.html" class="btn btn-primary">Get in Touch</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p id="footer-text">© 2025 Acme Digital. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="/js/main.js"></script>
+  <script>
+    loadContent('/content/pages/about.json', {
+      '#page-title':       'title',
+      '#page-description': 'description',
+      '#page-mission':     'mission',
+    });
+    loadSettings();
+
+    // Render markdown body from CMS (very light converter for the demo)
+    (async () => {
+      try {
+        const res = await fetch('/content/pages/about.json');
+        if (!res.ok) return;
+        const data = await res.json();
+        if (!data.body) return;
+        const el = document.getElementById('page-body');
+        if (!el) return;
+        // Basic markdown → HTML (headings, bold, paragraphs)
+        el.innerHTML = data.body
+          .replace(/^## (.+)$/gm, '<h2>$1</h2>')
+          .replace(/^### (.+)$/gm, '<h3>$1</h3>')
+          .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+          .split(/\n\n+/)
+          .map(block => block.startsWith('<h') ? block : `<p>${block.trim()}</p>`)
+          .join('\n');
+      } catch { /* keep inline defaults */ }
+    })();
+  </script>
+
+</body>
+</html>

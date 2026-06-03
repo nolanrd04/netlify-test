@@ -1,0 +1,23 @@
+[build]
+  publish = "public"
+
+[build.environment]
+  NODE_VERSION = "18"
+
+# Serve clean URLs (about instead of about.html)
+[[redirects]]
+  from = "/home"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/admin"
+  to = "/admin/index.html"
+  status = 200
+
+# Netlify Identity widget callback
+[[redirects]]
+  from = "/"
+  to = "/index.html"
+  status = 200
+  conditions = {Role = ["admin", "editor"]}
